@@ -1,28 +1,60 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { compose } from "recompose";
+import Layout from "./shared/components/Layout/Layout";
+import Categories from "./components/Categories/Categories";
+import Locations from "./components/Locations/Locations";
+import * as actions from "./store/actions";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
-
-export default App;
+const App = ({
+  locations,
+  addCategory,
+  deleteCategory,
+  categories,
+  editCategoryAction,
+  addLocation,
+  deleteLocation
+}) => {
+  return (
+    <Layout>
+      <Route
+        path="/Categires"
+        render={() => (
+          <Categories
+            addCategory={addCategory}
+            deleteCategory={deleteCategory}
+            editCategoryAction={editCategoryAction}
+            formCategories={categories}
+          />
+        )}
+      />
+      <Route
+        path="/locations"
+        render={() => (
+          <Locations
+            addLocation={addLocation}
+            deleteLocation={deleteLocation}
+            formCategories={categories}
+          />
+        )}
+      />
+    </Layout>
+  );
+};
+export default compose(
+  withRouter,
+  connect(
+    state => ({
+      locations: state.locations,
+      categories: state.categories
+    }),
+    {
+      addCategory: actions.actions.addCategory,
+      deleteCategory: actions.deleteCategory,
+      editCategoryAction: actions.editCategoryAction,
+      addLocation: actions.addLocation,
+      deleteLocation: actions.deleteLocation
+    }
+  )
+)(App);
