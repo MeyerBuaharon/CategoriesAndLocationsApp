@@ -14,7 +14,7 @@ export const categoryReducer = composeReducers(
   makeReducer(
     actions.fetchCategory,
     state => {
-      const categories = JSON.parse(localStorage.getItem("categories"));
+      const categories = JSON.parse(localStorage.getItem("categories")) || [];
       return { ...state, categories };
     },
     {
