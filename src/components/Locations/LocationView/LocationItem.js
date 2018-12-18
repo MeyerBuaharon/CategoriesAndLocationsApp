@@ -1,10 +1,16 @@
 import React from "react";
 import { branch, renderComponent, renderNothing } from "recompose";
+import styled from 'styled-components';
 import IconButton from "@material-ui/core/IconButton";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import BaseListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import { Delete, Edit } from "@material-ui/icons";
+
+const ListItemText = styled(BaseListItemText)`
+  cursor: pointer;
+`;
+
 const LocationItem = ({ location, deleteItem, selectItem, openMap }) => {
   return (
     <ListItem>
