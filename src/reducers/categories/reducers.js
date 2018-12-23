@@ -25,6 +25,7 @@ export const categoryReducer = composeReducers(
     const newCategory = { ...payload, _id: genId() };
     const newerCategories = [...state.categories, newCategory];
     setLocal(newerCategories);
+    console.log("git checkout 2");
     return { ...state, categories: newerCategories };
   }),
   makeReducer(actions.removeCategory, (state, { payload }) => {
