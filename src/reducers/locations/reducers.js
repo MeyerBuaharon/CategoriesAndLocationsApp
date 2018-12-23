@@ -15,6 +15,7 @@ export const locationReducer = composeReducers(
     actions.fetchLocation,
     state => {
       const Locations = JSON.parse(localStorage.getItem("location")) || [];
+      console.log('ss');
       return { ...state, Locations };
     },
     {
